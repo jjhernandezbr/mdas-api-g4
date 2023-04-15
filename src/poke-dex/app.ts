@@ -3,6 +3,7 @@ import express from "express";
 import path from "path";
 
 import { registerPokemonRoutes } from "./pokemons/infrastructure/apirest/routes";
+import InMemoryPokemonFavsRepository from "./pokemons/infrastructure/repositories/in-memory.pokemon-favs.repository";
 import { registerUserRoutes } from "./users/infrastructure/apirest/routes";
 
 // Create Express server
@@ -14,6 +15,8 @@ app.set("port", process.env.PORT ?? 3000);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Setup locals
+app.locals.favoritePokemon = new Map();
 app.use(express.static(path.join(__dirname, "../public"), { maxAge: 31557600000 }));
 
 registerPokemonRoutes(app);
