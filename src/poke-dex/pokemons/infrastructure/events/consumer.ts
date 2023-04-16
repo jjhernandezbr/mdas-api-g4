@@ -1,4 +1,7 @@
+
 import amqp from 'amqplib/callback_api';
+import { on } from 'events';
+import AddPokemonFavUseCase from '../../application/use-cases/add-pokemon-fav.use-case';
 
 const options = {
   clientProperties:
@@ -21,14 +24,9 @@ amqp.connect('amqp://rabbitmquser:rabbitmqpassword@localhost', options, (error, 
 
     channel.prefetch(1);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    channel.consume('test_queue', (msg: any) => {
-      console.log(msg.content.toString());
-
-      setTimeout(() => {
-        connection.close();
-        process.exit(0);
-      }, 500);
+    channel.consume('test_queue', (msg) => {
+      if (msg !== null)
+        console.log(msg.content.toString());
     }, {
       noAck: true
     });
