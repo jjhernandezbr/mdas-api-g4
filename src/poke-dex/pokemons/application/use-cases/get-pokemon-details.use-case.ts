@@ -1,12 +1,12 @@
+import { PokemonFavsRepositoryInterface } from "../../domain/interfaces/pokemon-favs-repository.interface";
 import { PokemonRepository } from "../../domain/interfaces/pokemon-repository.interface";
 import { PokemonId, PokemonNumsFav } from "../../domain/value-objects";
-import InMemoryPokemonFavsRepository from "../../infrastructure/repositories/in-memory.pokemon-favs.repository";
 
 class GetPokemonDetailsUseCase {
     private pokemonRepository: PokemonRepository;
-    private pokemonFavRepository: InMemoryPokemonFavsRepository;
+    private pokemonFavRepository: PokemonFavsRepositoryInterface;
 
-    constructor(pokemonRepository: PokemonRepository, pokemonFavsRepository: InMemoryPokemonFavsRepository) {
+    constructor(pokemonRepository: PokemonRepository, pokemonFavsRepository: PokemonFavsRepositoryInterface) {
         this.pokemonRepository = pokemonRepository;
         this.pokemonFavRepository = pokemonFavsRepository;
     }
