@@ -1,4 +1,4 @@
-# Pokemon DDD Project.
+# Pokemon DDD Project
 
 ## Tools
 
@@ -16,34 +16,39 @@
 ### Install dependencies
 
 ```
-$ npm install
+npm install
 ```
 
-### Find pokemon type via cli.
+### Find pokemon type via cli
 
 ```
-$ npm run cli -- types --name={pokemonName}
+npm run cli -- types --name={pokemonName}
 ```
 
-### Use API REST.
+### Use API REST
+
+- Start server (+ RabbitMQ)
+
+  ```
+  $ docker compose up rabbitmq server
 
 - Start server
 
   ```
-  $ npm run dev
+  npm run dev
   ```
 
 - Find pokemon type via API REST.
 
-  On browser (GET) -> http://localhost:3000/type?pokemon_name={pokemonName}
+  On browser (GET) -> <http://localhost:3000/type?pokemon_name={pokemonName>}
 
 - Find pokemon details via API REST.
 
-  On browser (GET) -> http://localhost:3000/pokemon/{pokemonId}
+  On browser (GET) -> <http://localhost:3000/pokemon/{pokemonId>}
 
 - Create user via API REST.
 
-  On Postman (POST) -> http://localhost:3000/user
+  On Postman (POST) -> <http://localhost:3000/user>
 
   with raw JSON body:
 
@@ -56,7 +61,7 @@ $ npm run cli -- types --name={pokemonName}
 
 - Add favourite pokemon to user via API REST.
 
-  On Postman (PATCH) -> http://localhost:3000/user/{userId}/favourites
+  On Postman (PATCH) -> <http://localhost:3000/user/{userId}/favourites>
 
   with raw JSON body:
 
