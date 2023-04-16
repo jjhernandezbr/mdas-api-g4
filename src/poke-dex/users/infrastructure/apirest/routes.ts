@@ -6,8 +6,6 @@ import AddPokemonToUserFavouritesUseCase from "../../application/use-cases/add-p
 import InMemoryUserRepository from "../repository/in-memory-user.repository";
 import { UserAlreadyExistsException } from "../../domain/exceptions/user-already-exists.exception";
 import { UserPokemonAlreadyInFavouritesException } from "../../domain/exceptions/user-pokemon-already-in-favourites.exception";
-import AddPokemonFavUseCase from "../../../pokemons/application/use-cases/add-pokemon-fav.use-case";
-import InMemoryPokemonFavsRepository from "../../../pokemons/infrastructure/repositories/in-memory.pokemon-favs.repository";
 import RabbitMqEventPublisher from "../events/rabbitMqEventPublisher";
 
 
@@ -34,13 +32,8 @@ export const registerUserRoutes = (app: Application): void => {
     try {
       const userId = Number(req.params.userId);
       const pokemonId = Number(req.body.pokemon_id);
-      console.log("user id: ", userId, "   pokemon id", pokemonId.toString());
       const addPokemonToUserFavouritesUseCase = new AddPokemonToUserFavouritesUseCase(new InMemoryUserRepository(), new RabbitMqEventPublisher());
       addPokemonToUserFavouritesUseCase.execute(userId, pokemonId);
-
-      // const addPokemonFavUseCase = new AddPokemonFavUseCase(new InMemoryPokemonFavsRepository());
-      // addPokemonFavUseCase.execute(3);
-      // console.log("ADDED");
 
       return res.status(200).send('Pokemon added to favourites');
     } catch (error: any) {

@@ -31,7 +31,7 @@ class RabbitMqEventPublisher implements EventPublisher {
           channel.assertQueue('test_queue', {
             durable: true
           });
-          channel.sendToQueue('test_queue', Buffer.from(event.pokemonId.toString()), {
+          channel.sendToQueue('test_queue', Buffer.from(JSON.stringify(event)), {
             persistent: true
           });
         });

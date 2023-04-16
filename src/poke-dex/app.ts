@@ -2,6 +2,7 @@
 import express from "express";
 import path from "path";
 import { registerPokemonRoutes } from "./pokemons/infrastructure/apirest/routes";
+import { registerSubscriber } from "./pokemons/infrastructure/subscriber/registerSubscriber";
 import { registerUserRoutes } from "./users/infrastructure/apirest/routes";
 
 // Create Express server
@@ -22,6 +23,7 @@ registerPokemonRoutes(app);
 registerUserRoutes(app);
 
 if (process.env.NODE_ENV !== "TEST") {
+	registerSubscriber();
 	server = app.listen(app.get("port"), () => {
 		console.log(
 			"  App is running at http://localhost:%d in %s mode",
