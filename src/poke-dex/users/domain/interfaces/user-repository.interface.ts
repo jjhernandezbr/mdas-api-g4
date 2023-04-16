@@ -4,6 +4,6 @@ import { PokemonId } from "../../../pokemons/domain/value-objects";
 
 export interface UserRepositoryInterface {
   save(user: UserAggregate): void;
-  addFavouritePokemon(userId: UserId, pokemonId: PokemonId): void;
+  addFavouritePokemon(userId: UserId, pokemonId: PokemonId): UserAggregate;
   findUserById(userId: UserId): UserAggregate | undefined;
 }
