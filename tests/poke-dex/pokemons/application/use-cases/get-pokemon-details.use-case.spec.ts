@@ -26,13 +26,18 @@ const mockPokemonRepository = {
   getPokemonById: jest.fn().mockReturnValue(pokemon) //
 }
 
+const mockPokemonFavsRepository = {
+  sumFavouritePokemon: jest.fn(),
+  findPokemonById: jest.fn()
+}
+
 describe('GetPokemonDetails', () => {
   it('should be defined', () => {
     expect(GetPokemonDetails).toBeDefined();
   });
 
   it('should be executed', async () => {
-    const useCase = new GetPokemonDetails(mockPokemonRepository);
+    const useCase = new GetPokemonDetails(mockPokemonRepository, mockPokemonFavsRepository);
     expect(await useCase.execute(1)).toBe(pokemon);
     expect(mockPokemonRepository.getPokemonById).toBeCalledTimes(1);
   });

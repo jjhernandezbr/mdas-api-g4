@@ -2,12 +2,15 @@ import InMemoryUserRepository from "../../../../../src/poke-dex/users/infrastruc
 import UserAggregate from "../../../../../src/poke-dex/users/domain/user.aggregate";
 import { UserId, UserName } from "../../../../../src/poke-dex/users/domain/value-objects";
 import { PokemonId } from "../../../../../src/poke-dex/pokemons/domain/value-objects";
+import { app } from "../../../../../src/poke-dex/app";
+import { UserNotFoundException } from "../../../../../src/poke-dex/users/domain/exceptions/user-not-found.exception";
 
 describe("InMemoryUserRepository", () => {
   let inMemoryUserRepository: InMemoryUserRepository;
 
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository();
+    app.locals.users = [];
   });
 
   describe("save", () => {
@@ -50,11 +53,9 @@ describe("InMemoryUserRepository", () => {
       const userId = new UserId(1);
       const pokemonId = new PokemonId(1);
 
-      // When
-      inMemoryUserRepository.addFavouritePokemon(userId, pokemonId);
-
       // Then
-      expect(inMemoryUserRepository.findUserById(userId)).toBeUndefined();
+      expect(() => inMemoryUserRepository.addFavouritePokemon(userId, pokemonId)).toThrowError(UserNotFoundException);
+
     });
   });
 
